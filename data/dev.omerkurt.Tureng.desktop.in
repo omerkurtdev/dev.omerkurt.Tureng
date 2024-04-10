@@ -4,6 +4,6 @@ Exec=turengvocabulary
 Icon=dev.omerkurt.Tureng
 Terminal=false
 Type=Application
-Categories=GTK;
+Categories=Utility;GTK;GNOME;
 StartupNotify=true
 Comment=Turkish-English dictionary
