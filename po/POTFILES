@@ -1,0 +1,6 @@
+data/dev.omerkurt.Tureng.desktop.in
+data/dev.omerkurt.Tureng.metainfo.xml.in
+data/dev.omerkurt.Tureng.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

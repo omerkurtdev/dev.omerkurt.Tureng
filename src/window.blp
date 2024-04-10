@@ -1,0 +1,550 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $TurengvocabularyWindow: Adw.ApplicationWindow {
+  width-request: 360;
+  height-request: 640;
+  default-width: 640;
+  default-height: 640;
+
+  Adw.ToolbarView toolbar_view {
+    [top]
+    Adw.HeaderBar {
+      title-widget: Box {
+        SearchEntry entry_search {
+          visible: false;
+        }
+      };
+
+      [end]
+      MenuButton {
+        icon-name: "open-menu-symbolic";
+        tooltip-text: _("Main Menu");
+        primary: true;
+        menu-model: menu_app;
+      }
+
+      [start]
+      Button find_icon {
+        icon-name: "system-search-symbolic";
+      }
+    }
+
+    [bottom]
+    Adw.ViewSwitcher {
+      halign: center;
+      stack: stack;
+    }
+
+    content: Adw.ViewStack stack {
+      Adw.ViewStackPage page_defualt {
+        name: "page_default";
+        title: _("Home");
+        icon-name: "user-home-symbolic";
+
+        child: Box {
+          vexpand-set: true;
+          hexpand-set: true;
+          halign: center;
+
+          Box {
+            halign: center;
+            orientation: vertical;
+            spacing: 18;
+
+            Image svg_logo {
+              pixel-size: 320;
+              icon-name: "tureng-dark";
+              name: "logo";
+            }
+
+            Adw.Clamp {
+              Box {
+                orientation: vertical;
+
+                Box {
+                  orientation: horizontal;
+                  homogeneous: true;
+
+                  Label {
+                    label: _('Trending Now');
+                    xalign: 0.5;
+
+                    styles [
+                      "title-1",
+                    ]
+                  }
+
+                  Label {
+                    xalign: 0.5;
+                    label: _('Word of the day');
+                    use-markup: true;
+
+                    styles [
+                      "title-1",
+                    ]
+                  }
+
+                  Label {
+                    xalign: 0.5;
+                    label: _('Idiom of the Week');
+                    use-markup: true;
+
+                    styles [
+                      "title-1",
+                    ]
+                  }
+                }
+
+                Box {
+                  spacing: 30;
+                  orientation: horizontal;
+                  homogeneous: true;
+
+                  Frame {
+                    width-request: 400;
+                    height-request: 400;
+
+                    Box {
+                      halign: start;
+                      valign: start;
+                      orientation: vertical;
+                      homogeneous: false;
+                      spacing: 5;
+                      margin-top: 30;
+                      margin-start: 18;
+
+                      Box {
+                        Button t1 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill0",
+                          ]
+                        }
+                      }
+
+                      Box {
+                        Button t2 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill1",
+                          ]
+                        }
+                      }
+
+                      Box {
+                        Button t3 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill2",
+                          ]
+                        }
+                      }
+
+                      Box {
+                        Button t4 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill3",
+                          ]
+                        }
+                      }
+
+                      Box {
+                        Button t5 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill4",
+                          ]
+                        }
+                      }
+
+                      Box {
+                        Button t6 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill5",
+                          ]
+                        }
+                      }
+
+                      Box {
+                        Button t7 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill6",
+                          ]
+                        }
+                      }
+
+                      Box {
+                        Button t8 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill7",
+                          ]
+                        }
+                      }
+                                            Box {
+                        Button t9 {
+                          valign: start;
+
+                          child: Label {
+                            label: _('API Reference');
+                            xalign: 0;
+                          };
+
+                          styles [
+                            "pill8",
+                          ]
+                        }
+                      }
+                    }
+                  }
+
+                  Frame {
+                    width-request: 400;
+                    height-request: 400;
+
+                    Box {
+                      orientation: vertical;
+                      valign: center;
+                      halign: center;
+
+                      Box {
+                        valign: start;
+                        orientation: vertical;
+
+                        Label label_en {
+                          label: _('wig');
+
+                          styles [
+                            "title-1",
+                          ]
+                        }
+
+                        Label label_ex {
+                          label: _('(noun)');
+
+                          styles [
+                            "title-3",
+                          ]
+                        }
+
+                        Label label_tr {
+                          label: _('peruk');
+
+                          styles [
+                            "title-1",
+                          ]
+                        }
+                      }
+
+                      Label label_en_example {
+                        margin-top: 50;
+                        label: _('"Holly wanted the pinkwig for herHalloween costume."');
+                        wrap: true;
+                        halign: fill;
+
+                        styles [
+                          "title-4",
+                        ]
+                      }
+
+                      Label label_tr_example {
+                        margin-top: 30;
+                        label: _('"Holly wanted the pinkwig for herHalloween costume."');
+                        wrap: true;
+                        halign: fill;
+
+                        styles [
+                          "title-4",
+                        ]
+                      }
+                    }
+
+                    styles [
+                      "pc-4",
+                    ]
+                  }
+
+                  Frame {
+                    width-request: 400;
+                    height-request: 400;
+
+                    Box {
+                      orientation: vertical;
+                      spacing: 5;
+                      valign: center;
+                      halign: center;
+
+                      Image idiom_image {
+                        pixel-size: 400;
+                      }
+                    }
+                  }
+                }
+
+                Box {
+                  homogeneous: true;
+                  orientation: horizontal;
+                  margin-top: 20;
+
+                  Label {
+                    label: _('Newly Coined');
+                    wrap: true;
+                    halign: fill;
+
+                    styles [
+                      "title-1",
+                    ]
+                  }
+
+                  Label {
+                    label: _('Newly Added');
+                    wrap: true;
+                    halign: fill;
+
+                    styles [
+                      "title-1",
+                    ]
+                  }
+
+                  Label {
+                    label: _('History');
+                    wrap: true;
+                    halign: fill;
+
+                    styles [
+                      "title-1",
+                    ]
+                  }
+                }
+
+                Box {
+                  orientation: horizontal;
+                  spacing: 30;
+                  homogeneous: true;
+                  vexpand-set: true;
+                  hexpand-set: true;
+
+                  Frame {
+                    width-request: 400;
+                    height-request: 400;
+
+                    Box {
+                      vexpand: true;
+                      hexpand: true;
+                      halign: center;
+                      valign: center;
+
+                      Image coined_image {
+                        pixel-size: 400;
+                      }
+                    }
+                  }
+
+                  Frame {
+                    width-request: 400;
+                    height-request: 400;
+
+                    ScrolledWindow scrolled_window {
+                      propagate-natural-height: true;
+                      max-content-height: 400;
+
+                      Box container {
+                        homogeneous: true;
+                        orientation: vertical;
+
+                        ListBox list_box {
+                          valign: start;
+
+                          styles [
+                            "boxed-list",
+                            "styled"
+                          ]
+                        }
+                      }
+                    }
+                  }
+
+                  Frame {
+                    width-request: 400;
+                    height-request: 400;
+                    ScrolledWindow  {
+                      propagate-natural-height: true;
+                      max-content-height: 400;
+                    Box {
+                      orientation: vertical;
+
+            ListBox list_box_editable {
+              hexpand: true;
+              valign: start;
+              activate-on-single-click: true;
+              selection-mode: single;
+
+              styles [
+                            "boxed-list",
+                            "styled"
+              ]
+            }
+                    }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        };
+      }
+
+      Adw.ViewStackPage page3 {
+        name: "page3";
+        title: _("Search");
+        icon-name: "system-search-symbolic";
+        use-underline: true;
+
+        child: Adw.StatusPage search_status {
+          title: _("Search");
+          icon-name: "system-search-symbolic";
+
+          Box {
+            orientation: vertical;
+            halign: center;
+
+            Box {
+              orientation: horizontal;
+              margin-bottom: 10;
+              halign: center;
+              spacing: 10;
+
+              Button us_play {
+                Adw.ButtonContent {
+                  label: _("US");
+                  icon-name: "execute-from-symbolic";
+                }
+
+                visible: false;
+              }
+
+              Button uk_play {
+                Adw.ButtonContent {
+                  label: _("UK");
+                  icon-name: "execute-from-symbolic";
+                }
+
+                visible: false;
+              }
+
+              Button au_play {
+                Adw.ButtonContent {
+                  label: _("AU");
+                  icon-name: "execute-from-symbolic";
+                }
+
+                visible: false;
+              }
+            }
+
+            Frame {
+              halign: center;
+
+              ColumnView column_view {
+                show-column-separators: true;
+                show-row-separators: true;
+
+                ColumnViewColumn col1 {
+                  title: _("");
+
+                  factory: SignalListItemFactory factory1 {};
+                }
+
+                ColumnViewColumn col2 {
+                  title: _("Category");
+
+                  factory: SignalListItemFactory factory2 {};
+                }
+
+                ColumnViewColumn col3 {
+                  title: _("Turkish");
+
+                  factory: SignalListItemFactory factory3 {};
+                }
+
+                ColumnViewColumn col4 {
+                  title: _("English");
+
+                  factory: SignalListItemFactory factory4 {};
+                }
+              }
+            }
+          }
+        };
+      }
+    };
+  }
+}
+
+menu menu_app {
+  section {
+    item {
+      label: _("Keyboard Shortcuts");
+      action: "app.shortcuts";
+    }
+
+    item {
+      label: _("About Workbench");
+      action: "app.about";
+    }
+  }
+}
+
+

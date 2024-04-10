@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/dev/omerkurt/Tureng">
+        <file>style.css</file>
+    <file preprocess="xml-stripblanks">window.ui</file>
+    <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+  </gresource>
+    <gresource prefix="/dev/omerkurt/Tureng/icons/scalable/actions">
+  <file alias="user-home-symbolic.svg">../data/icons/symbolic/user-home-symbolic.svg</file>
+  <file alias="info-symbolic.svg">../data/icons/symbolic/info-symbolic.svg</file>
+  <file alias="tureng-dark.svg">../data/icons/symbolic/tureng-dark.svg</file>
+  <file alias="tureng-light.svg">../data/icons/symbolic/tureng-light.svg</file>
+  <file alias="execute-from-symbolic.svg">../data/icons/symbolic/execute-from-symbolic.svg</file>
+  <file alias="t_icon.svg">../data/icons/symbolic/t_icon.svg</file>
+  <file alias="system-search-symbolic.svg">../data/icons/symbolic/system-search-symbolic.svg</file>
+    </gresource>
+</gresources>

@@ -1,0 +1,41 @@
+.pill0 {
+  min-width: 280px;
+}
+.pill1 {
+  min-width: 265px;
+}
+.pill2 {
+  min-width: 250px;
+}
+.pill3 {
+  min-width: 235px;
+}
+.pill4 {
+  min-width: 220px;
+}
+.pill5 {
+  min-width: 205px;
+}
+.pill6 {
+  min-width: 190px;
+}
+.pill7 {
+  min-width: 175px;
+}
+.pill8 {
+  min-width: 160px;
+}
+.pill {
+  min-width: 175px;
+}
+
+
+.styled {
+font-size: 14px;
+font-weight: bold;
+}
+
+.inverted {
+  filter:invert(100%);
+}
+
