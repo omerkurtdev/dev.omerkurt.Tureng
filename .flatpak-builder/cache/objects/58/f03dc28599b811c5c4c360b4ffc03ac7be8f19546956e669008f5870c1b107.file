@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>dev.omerkurt.Tureng.desktop</id>
+  <name translate="no">Tureng</name>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <summary>Turkish-English dictionary</summary>
+  <url type="homepage">https://github.com/omerkurtdev/tureng-flathub</url>
+  <url type="bugtracker">https://github.com/omerkurtdev/tureng-flathub/issues</url>
+  <developer>
+    <name translate="no">Ömer Kurt</name>
+  </developer>
+  <description>
+    <p>No description</p>
+  </description>
+</component>

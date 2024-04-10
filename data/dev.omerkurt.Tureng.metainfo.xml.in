@@ -4,13 +4,27 @@
     <name translate="no">Tureng</name>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
-    <summary>Turkish-English dictionary</summary>
-    <url type="homepage">https://github.com/omerkurtdev/tureng-flathub</url>
-  <url type="bugtracker">https://github.com/omerkurtdev/tureng-flathub/issues</url>
+    <summary>Tureng dictionary</summary>
+    <url type="vcs-browser">https://github.com/omerkurtdev/tureng-flathub</url>
+    <url type="bugtracker">https://github.com/omerkurtdev/tureng-flathub/issues</url>
+    <content_rating type="oars-1.1" />
   <developer>
       <name translate="no">Ömer Kurt</name>
   </developer>
+
+    <screenshots>
+    <screenshot type="default">
+      <image>.</image>
+    </screenshot>
+    <screenshot>
+      <image>.</image>
+    </screenshot>
+  </screenshots>
+
+
 	<description>
-	  <p>No description</p>
+    <p>
+    A Turkish-English dictionary where all meanings of words, terms, idioms, phrases and usage are easily accessible.
+    </p>
 	</description>
 </component>
