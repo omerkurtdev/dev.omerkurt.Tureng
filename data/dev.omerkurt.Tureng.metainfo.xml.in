@@ -9,8 +9,8 @@
     <url type="homepage">https://github.com/omerkurtdev/tureng-flathub</url>
     <url type="bugtracker">https://github.com/omerkurtdev/tureng-flathub/issues</url>
     <content_rating type="oars-1.1" />
-  <developer>
-      <name translate="no">Ömer Kurt</name>
+  <developer id="dev.omerkurt">
+      <name>Ömer Kurt</name>
   </developer>
     <screenshots>
     <screenshot type="default">
@@ -27,6 +27,13 @@
     A Turkish-English dictionary where all meanings of words, terms, idioms, phrases and usage are easily accessible.
     </p>
 	</description>
+    <releases>
+      <release version="1.0.0" date="2024-04-11">
+      <description translate="no">
+        <p>Initial release.</p>
+      </description>
+    </release>
+  </releases>
     <recommends>
     <control>keyboard</control>
     <control>pointing</control>
