@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>dev.omerkurt.Tureng.desktop</id>
+  <name translate="no">Tureng</name>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <summary>Tureng dictionary</summary>
+  <launchable type="desktop-id">dev.omerkurt.Tureng.desktop</launchable>
+  <url type="homepage">https://github.com/omerkurtdev/tureng-flathub</url>
+  <url type="bugtracker">https://github.com/omerkurtdev/tureng-flathub/issues</url>
+  <content_rating type="oars-1.1"/>
+  <developer>
+    <name translate="no">Ömer Kurt</name>
+  </developer>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/omerkurtdev/tureng-flathub/main/data/images/tureng_main.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/omerkurtdev/tureng-flathub/main/data/images/tureng_search.png</image>
+    </screenshot>
+  </screenshots>
+  <description>
+    <p>
+    A Turkish-English dictionary where all meanings of words, terms, idioms, phrases and usage are easily accessible.
+    </p>
+  </description>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </recommends>
+</component>

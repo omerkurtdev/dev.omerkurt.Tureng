@@ -15,9 +15,11 @@
     <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/omerkurtdev/tureng-flathub/main/data/images/tureng_main.png</image>
+          <caption>Home Page</caption>
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/omerkurtdev/tureng-flathub/main/data/images/tureng_search.png</image>
+          <caption>Categorization of Words</caption>
     </screenshot>
   </screenshots>
 	<description>
