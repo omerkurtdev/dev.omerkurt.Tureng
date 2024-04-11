@@ -20,7 +20,8 @@
 import codecs
 
 import gi
-gi.require_version('Gst', '1.0')
+
+gi.require_version("Gst", "1.0")
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw
@@ -41,41 +42,41 @@ from datetime import datetime, timedelta
 import os
 import subprocess
 
-class KelimeYonetici:
-    def __init__(self):
-        self.data_dir = os.getenv('XDG_DATA_HOME', os.path.join(os.path.expanduser('~'), '.local', 'share'))
-        self.file_path = os.path.join(self.data_dir, 'kelimeler.json')
-        self.data = {
-            "kelimeler": []
-        }
-        self.dosyayi_yukle()
-        print(self.data_dir)
-    def dosyayi_yukle(self):
-        # Eğer dosya varsa, içeriğini yükle
-        try:
-            with open(self.file_path, 'r', encoding='utf-8') as file:
-                self.data = json.load(file)
-        except FileNotFoundError:
-            pass
+# class KelimeYonetici:
+#     def __init__(self):
+#         self.data_dir = os.getenv('XDG_DATA_HOME', os.path.join(os.path.expanduser('~'), '.local', 'share'))
+#         self.file_path = os.path.join(self.data_dir, 'kelimeler.json')
+#         self.data = {
+#             "kelimeler": []
+#         }
+#         self.dosyayi_yukle()
+#         print(self.data_dir)
+#     def dosyayi_yukle(self):
+# Eğer dosya varsa, içeriğini yükle
+#         try:
+#             with open(self.file_path, 'r', encoding='utf-8') as file:
+#                 self.data = json.load(file)
+#         except FileNotFoundError:
+#             pass
 
-    def kelime_ekle(self, kelime):
-        # Kelimeyi listeye ekle
-        self.data["kelimeler"].insert(0,kelime)
-        # Değişiklikleri dosyaya kaydet
-        self.dosyayi_kaydet()
+#     def kelime_ekle(self, kelime):
+# Kelimeyi listeye ekle
+#         self.data["kelimeler"].insert(0,kelime)
+# Değişiklikleri dosyaya kaydet
+#         self.dosyayi_kaydet()
 
-    def dosyayi_kaydet(self):
-        # Veriyi JSON dosyasına yaz
-        os.makedirs(self.data_dir, exist_ok=True)
-        with open(self.file_path, 'w', encoding='utf-8') as file:
-            json.dump(self.data, file, ensure_ascii=False, indent=4)
+#     def dosyayi_kaydet(self):
+# Veriyi JSON dosyasına yaz
+#         os.makedirs(self.data_dir, exist_ok=True)
+#         with open(self.file_path, 'w', encoding='utf-8') as file:
+#             json.dump(self.data, file, ensure_ascii=False, indent=4)
 
 # Örnek kullanım
 
 
 # yonetici.kelime_ekle("yeni_kelimse")
 
-Word = namedtuple("Word", ["word", "word2", "word3","mp3_link"])
+Word = namedtuple("Word", ["word", "word2", "word3", "mp3_link"])
 BASE_API_URL = "https://tureng.com/tr/turkce-ingilizce/"
 
 
@@ -85,12 +86,17 @@ class Word(GObject.Object):
     word2 = GObject.Property(type=str)  # Third word column, identical to the first
     word3 = GObject.Property(type=str)  # Third word column, identical to the first
     mp3_link = GObject.Property(type=str)  # Third word column, identical to the first
+
     def __str__(self):
-            return f"Word: {self.word}, Word1: {self.word1}, Word2: {self.word2}, Word3: {self.word3}, MP3 Link: {self.mp3_link}"
+        return f"Word: {self.word}, Word1: {self.word1}, Word2: {self.word2}, Word3: {self.word3}, MP3 Link: {self.mp3_link}"
 
     def __repr__(self):
-        return (f"{self.__class__.__name__}(word={self.word}, word1={self.word1}, "
-                f"word2={self.word2}, word3={self.word3}, mp3_link={self.mp3_link})")
+        return (
+            f"{self.__class__.__name__}(word={self.word}, word1={self.word1}, "
+            f"word2={self.word2}, word3={self.word3}, mp3_link={self.mp3_link})"
+        )
+
+
 async def fetch_words_async(search_term):
     # `filtered_data` ve `mp3_links` değişkenlerinin başlangıçta boş olduğunu varsayarak
     filtered_data = []
@@ -117,9 +123,14 @@ async def fetch_words_async(search_term):
                         data = data[1:] if data else []
                         filtered_data = [item for item in data if len(item) >= 3]
 
-                    mp3_links = {element.get_text(strip=True): element.find('source', src=True)['src']
-                                 for element in soup.select('.tureng-voice')
-                                 if element.find('source', src=True) and element.find('source', src=True)['src'].endswith('.mp3')}
+                    mp3_links = {
+                        element.get_text(strip=True): element.find("source", src=True)[
+                            "src"
+                        ]
+                        for element in soup.select(".tureng-voice")
+                        if element.find("source", src=True)
+                        and element.find("source", src=True)["src"].endswith(".mp3")
+                    }
 
                 else:
                     print(f"Failed to fetch data, status code: {response.status}")
@@ -131,8 +142,13 @@ async def fetch_words_async(search_term):
     for row in filtered_data:
         word_text = " ".join(row[:4])
         mp3_link = mp3_links.get(word_text, None)
-        words.append(Word(word=row[0], word1=row[1], word2=row[2], word3=row[3], mp3_link=mp3_link))
+        words.append(
+            Word(
+                word=row[0], word1=row[1], word2=row[2], word3=row[3], mp3_link=mp3_link
+            )
+        )
     return words, mp3_links
+
 
 def fetch_words_column(search_term):
     loop = asyncio.new_event_loop()
@@ -140,6 +156,7 @@ def fetch_words_column(search_term):
     words = loop.run_until_complete(fetch_words_async(search_term))
     loop.close()
     return words
+
 
 class AudioPlayer:
     def __init__(self):
@@ -156,6 +173,7 @@ class AudioPlayer:
         self.player.set_property("uri", url)
         # Start playing
         self.player.set_state(Gst.State.PLAYING)
+
 
 @Gtk.Template(resource_path="/dev/omerkurt/Tureng/window.ui")
 class TurengvocabularyWindow(Adw.ApplicationWindow):
@@ -198,6 +216,7 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
     search_status = Gtk.Template.Child()
     svg_logo = Gtk.Template.Child()
     list_box_editable = Gtk.Template.Child()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.audio_player = AudioPlayer()
@@ -212,15 +231,15 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
         guest = self.guest_list(fetch)
         newlyAddedTerms = self.newlyAddedTerms(fetch)
 
-
         self.populate_list_box(newlyAddedTerms)
         self.list_box.connect("row-selected", self.on_row_selected)
         self.list_box_editable.connect("row-selected", self.on_row_selected)
         self.populate_images(fetch)
-        self.populate_trending_words(trending_words_fetch )
+        self.populate_trending_words(trending_words_fetch)
         self.setup_date_related_ui(words_day_fetch)
         self.configure_style_manager()
         self.populate_list_box_editable([])
+
     def populate_list_box(self, items):
         for item in items:
             label = Gtk.Label(label=item)
@@ -258,7 +277,7 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
     def populate_trending_words(self, trending_words):
         selected_words = random.sample(trending_words, min(9, len(trending_words)))
         for i, word in enumerate(selected_words):
-            button = getattr(self, f't{i+1}')
+            button = getattr(self, f"t{i+1}")
             button.get_child().set_text(word)
             button.connect("clicked", self.on_button_clickeds)
 
@@ -293,19 +312,18 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
         current_color_scheme = style_manager.get_color_scheme()
         style_manager.set_color_scheme(Adw.ColorScheme.FORCE_LIGHT)
 
-
-
     def write_sample_file(self):
-        data_dir = os.getenv('XDG_DATA_HOME', os.path.join(os.path.expanduser('~'), '.local', 'share'))
-        file_path = os.path.join(data_dir, 'history.json')
+        data_dir = os.getenv(
+            "XDG_DATA_HOME", os.path.join(os.path.expanduser("~"), ".local", "share")
+        )
+        file_path = os.path.join(data_dir, "history.json")
         try:
             os.makedirs(data_dir, exist_ok=True)
-            with open(file_path, 'w') as file:
+            with open(file_path, "w") as file:
                 file.write("Merhaba, bu bir test mesajıdır!\n")
             print(f"'{file_path}' dizinine yazıldı.")
         except Exception as e:
             print(f"Dosyaya yazma işlemi sırasında hata oluştu: {e}")
-
 
     def on_row_selected(self, listbox, row):
         if row is not None:
@@ -396,7 +414,7 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
             ).start()
 
     def update_words(self, search_term):
-        words, mp3_links  = fetch_words_column(search_term)
+        words, mp3_links = fetch_words_column(search_term)
         if len(words) == 0:
             self.search_status.set_title("Bulunamadı!")
             self.remove_last_prepended_item()
@@ -407,18 +425,39 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
         if mp3_links:
             self.col3.set_title("English")
             self.col4.set_title("Turkish")
-            self.us_play.set_visible(True);
-            self.uk_play.set_visible(True);
-            self.au_play.set_visible(True);
+            self.us_play.set_visible(True)
+            self.uk_play.set_visible(True)
+            self.au_play.set_visible(True)
         else:
             self.col3.set_title("Turkish")
             self.col4.set_title("English")
-            self.us_play.set_visible(False);
-            self.uk_play.set_visible(False);
-            self.au_play.set_visible(False);
-        self.us_play.connect("clicked", lambda button: self.on_play_clickeds(button, "https:" + mp3_links["Play ENTRENus"]) if mp3_links.get("Play ENTRENus") else None)
-        self.uk_play.connect("clicked", lambda button: self.on_play_clickeds(button, "https:" + mp3_links["Play ENTRENuk"]) if mp3_links.get("Play ENTRENuk") else None)
-        self.au_play.connect("clicked", lambda button: self.on_play_clickeds(button, "https:" + mp3_links["Play ENTRENau"]) if mp3_links.get("Play ENTRENau") else None)
+            self.us_play.set_visible(False)
+            self.uk_play.set_visible(False)
+            self.au_play.set_visible(False)
+        self.us_play.connect(
+            "clicked",
+            lambda button: self.on_play_clickeds(
+                button, "https:" + mp3_links["Play ENTRENus"]
+            )
+            if mp3_links.get("Play ENTRENus")
+            else None,
+        )
+        self.uk_play.connect(
+            "clicked",
+            lambda button: self.on_play_clickeds(
+                button, "https:" + mp3_links["Play ENTRENuk"]
+            )
+            if mp3_links.get("Play ENTRENuk")
+            else None,
+        )
+        self.au_play.connect(
+            "clicked",
+            lambda button: self.on_play_clickeds(
+                button, "https:" + mp3_links["Play ENTRENau"]
+            )
+            if mp3_links.get("Play ENTRENau")
+            else None,
+        )
         GLib.idle_add(lambda: self.model.splice(0, len(self.model), words))
 
     def on_button_clicked(self, button):
@@ -485,7 +524,7 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
             print(f"An unexpected error occurred: {e}")
             return []  # Simplify the code
 
-    def guest_list(self,js_content):
+    def guest_list(self, js_content):
         pattern = r"slider_guest_list=(\[.*?\])"  # Regular expression pattern
         quote_pattern = r'"([^"\\]*(?:\\.[^"\\]*)*)"'
         try:
@@ -571,5 +610,4 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
 
             # Update the specified Gtk.Image widget to display the new image
             gtk_image_widget.set_from_pixbuf(pixbuf)
-
 

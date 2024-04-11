@@ -1,7 +1,7 @@
 # Subprojects
 /subprojects/blueprint-compiler
 
-# Distribution / packaging
+# Packaging
 .Python
 build/
 builddir/
@@ -10,7 +10,5 @@ _build/
 .flatpak/
 *.flatpak
 .flatpak-builder/
+repo/
 
-
-# Test Repo
-/local_repo/*

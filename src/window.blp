@@ -233,7 +233,8 @@ template $TurengvocabularyWindow: Adw.ApplicationWindow {
                           ]
                         }
                       }
-                                            Box {
+
+                      Box {
                         Button t9 {
                           valign: start;
 
@@ -419,24 +420,26 @@ template $TurengvocabularyWindow: Adw.ApplicationWindow {
                   Frame {
                     width-request: 400;
                     height-request: 400;
-                    ScrolledWindow  {
+
+                    ScrolledWindow {
                       propagate-natural-height: true;
                       max-content-height: 400;
-                    Box {
-                      orientation: vertical;
 
-            ListBox list_box_editable {
-              hexpand: true;
-              valign: start;
-              activate-on-single-click: true;
-              selection-mode: single;
+                      Box {
+                        orientation: vertical;
 
-              styles [
+                        ListBox list_box_editable {
+                          hexpand: true;
+                          valign: start;
+                          activate-on-single-click: true;
+                          selection-mode: single;
+
+                          styles [
                             "boxed-list",
                             "styled"
-              ]
-            }
-                    }
+                          ]
+                        }
+                      }
                     }
                   }
                 }
@@ -541,5 +544,3 @@ menu menu_app {
     }
   }
 }
-
-

@@ -20,8 +20,8 @@
 import sys
 import gi
 
-gi.require_version('Gtk', '4.0')
-gi.require_version('Adw', '1')
+gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Gio, Adw, GLib
 from .window import TurengvocabularyWindow
@@ -31,9 +31,11 @@ class TurengvocabularyApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='dev.omerkurt.Tureng',
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('about', self.on_about_action)
+        super().__init__(
+            application_id="dev.omerkurt.Tureng",
+            flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
+        )
+        self.create_action("about", self.on_about_action)
 
     def do_activate(self):
         """Called when the application is activated.
@@ -48,19 +50,20 @@ class TurengvocabularyApplication(Adw.Application):
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='Tureng',
-                                application_icon='dev.omerkurt.Tureng',
-                                developer_name='omerkurt',
-                                version='0.1.0',
-                                developers=['omerkurt'],
-                                copyright='© 2024 omerkurt')
+        about = Adw.AboutWindow(
+            transient_for=self.props.active_window,
+            application_name="Tureng",
+            application_icon="dev.omerkurt.Tureng",
+            developer_name="omerkurt",
+            version="0.1.0",
+            developers=["omerkurt"],
+            copyright="© 2024 omerkurt\n\n This application comes with absolutely no warranty. See the GNU General Public License, version 3 or later for details.",
+        )
         about.present()
-
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        print('app.preferences action activated')
+        print("app.preferences action activated")
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
@@ -82,3 +85,4 @@ def main(version):
     """The application's entry point."""
     app = TurengvocabularyApplication()
     return app.run(sys.argv)
+
