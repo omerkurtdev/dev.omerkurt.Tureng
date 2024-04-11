@@ -118,7 +118,7 @@
 
                     "type" : "git",
            	    "branch": "main",
-           	    "commit": "c471c301898bb1277d1ca27e591cbf8a3e9891c4",
+           	    "commit": "5664c6955258af1e33215c1fbc65f5bf4fa554c8",
                     "url" : "https://github.com/omerkurtdev/tureng-flathub"
                 }
             ]
