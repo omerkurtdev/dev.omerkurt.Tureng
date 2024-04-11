@@ -283,21 +283,24 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
 
     def setup_date_related_ui(self, words_by_day):
         current_date = datetime.now()
-        formatted_date = current_date.strftime("%Y-%m-%d")
-        result_array = self.get_array_by_date(words_by_day, formatted_date)
 
-        # Eğer bugünün verisi yoksa, bir gün öncesine bak
+        # Iterate over the last 5 days including today
+        for i in range(5):
+            formatted_date = (current_date - timedelta(days=i)).strftime("%Y-%m-%d")
+            result_array = self.get_array_by_date(words_by_day, formatted_date)
+
+            # If data is found for the calculated date, break out of the loop
+            if result_array is not None:
+                break
+
+        # If result_array is still None after checking the past 5 days, handle the no data case
         if result_array is None:
-            # Bir gün öncesini hesapla (datetime nesnesi üzerinden)
-            previous_day = current_date - timedelta(days=1)
-            # Bir gün öncesinin formatlanmış tarihini elde et
-            formatted_previous_day = previous_day.strftime("%Y-%m-%d")
-            # Bir gün öncesinin verisini al
-            result_array = self.get_array_by_date(words_by_day, formatted_previous_day)
+            utf8_text = "No data available for the past 5 days."
+        else:
+            # Convert the result_array to UTF-8 text
+            utf8_text = self.utf8_decode_list(result_array)
 
-        # result_array'ı UTF-8 metnine dönüştür
-        utf8_text = self.utf8_decode_list(result_array)
-        # UI'da ilgili metni ayarla
+        # Set the UI text to the appropriate message or data
         self.set_date_related_text(utf8_text)
 
     def set_date_related_text(self, utf8_text):
