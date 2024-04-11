@@ -3,7 +3,6 @@
   <gresource prefix="/dev/omerkurt/Tureng">
         <file>style.css</file>
     <file preprocess="xml-stripblanks">window.ui</file>
-    <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
   </gresource>
     <gresource prefix="/dev/omerkurt/Tureng/icons/scalable/actions">
   <file alias="user-home-symbolic.svg">../data/icons/symbolic/user-home-symbolic.svg</file>

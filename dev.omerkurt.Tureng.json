@@ -114,9 +114,12 @@
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
-                {"branch": "main",
+                {
+
                     "type" : "git",
-                    "url" : "file:///home/omerkurt/Projects/TurengVocabulary"
+           	    "branch": "main",
+           	    "commit": "40e8877520fff994ad6c6d7ba9574852c7291e7c",
+                    "url" : "https://github.com/omerkurtdev/tureng-flathub"
                 }
             ]
         }

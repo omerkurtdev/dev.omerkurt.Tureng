@@ -37,7 +37,7 @@ from PIL import Image
 from io import BytesIO
 from bs4 import BeautifulSoup
 from collections import namedtuple
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import subprocess
 
@@ -208,6 +208,7 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
         fetch = self.fetch_words()
         trending_words_fetch = self.trending_words(fetch)
         words_day_fetch = self.words_day(fetch)
+
         guest = self.guest_list(fetch)
         newlyAddedTerms = self.newlyAddedTerms(fetch)
 
@@ -265,7 +266,19 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
         current_date = datetime.now()
         formatted_date = current_date.strftime("%Y-%m-%d")
         result_array = self.get_array_by_date(words_by_day, formatted_date)
+
+        # Eğer bugünün verisi yoksa, bir gün öncesine bak
+        if result_array is None:
+            # Bir gün öncesini hesapla (datetime nesnesi üzerinden)
+            previous_day = current_date - timedelta(days=1)
+            # Bir gün öncesinin formatlanmış tarihini elde et
+            formatted_previous_day = previous_day.strftime("%Y-%m-%d")
+            # Bir gün öncesinin verisini al
+            result_array = self.get_array_by_date(words_by_day, formatted_previous_day)
+
+        # result_array'ı UTF-8 metnine dönüştür
         utf8_text = self.utf8_decode_list(result_array)
+        # UI'da ilgili metni ayarla
         self.set_date_related_text(utf8_text)
 
     def set_date_related_text(self, utf8_text):
@@ -330,7 +343,6 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
     def initialize_ui(self):
         self.entry_search.set_placeholder_text("Enter a word to search")
         self.entry_search.connect("activate", self.on_entry_activate)
-        print()
         self.selection_model = Gtk.SingleSelection(model=self.model)
         self.factory1.connect(
             "setup", lambda fac, list_item: list_item.set_child(Gtk.Label())
@@ -559,4 +571,5 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
 
             # Update the specified Gtk.Image widget to display the new image
             gtk_image_widget.set_from_pixbuf(pixbuf)
+
 
