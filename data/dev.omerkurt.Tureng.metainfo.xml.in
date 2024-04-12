@@ -12,12 +12,13 @@
 	<developer id="dev.omerkurt">
 		<name>Ömer Kurt</name>
 	</developer>
+  <content_rating type="oars-1.1" />
 	<screenshots>
 		<screenshot type="default">
-			<image>https://raw.githubusercontent.com/omerkurtdev/tureng-flathub/main/data/images/tureng_main.png</image>
+			<image>https://raw.githubusercontent.com/omerkurtdev/dev.omerkurt.Tureng/main/data/images/tureng_main.png</image>
 		</screenshot>
 		<screenshot>
-			<image>https://raw.githubusercontent.com/omerkurtdev/tureng-flathub/main/data/images/tureng_search.png</image>
+			<image>https://raw.githubusercontent.com/omerkurtdev/dev.omerkurt.Tureng/main/data/images/tureng_search.png</image>
 		</screenshot>
 	</screenshots>
 	<description>
@@ -37,6 +38,9 @@
 		<control>pointing</control>
 		<control>touch</control>
 	</recommends>
+    <requires>
+    <display_length compare="ge">768</display_length>
+  </requires>
   <branding>
     <color type="primary" scheme_preference="light">#a1f6b4</color>
     <color type="primary" scheme_preference="dark">#157b4c</color>
