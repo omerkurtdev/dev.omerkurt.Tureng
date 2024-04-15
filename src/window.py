@@ -25,7 +25,7 @@ gi.require_version("Gst", "1.0")
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw
-from gi.repository import Gtk, Gst, Gio, GObject, GLib, GdkPixbuf
+from gi.repository import Gtk, Gst, Gio, GObject, GLib, GdkPixbuf, Gdk
 import threading
 import asyncio
 import aiohttp
@@ -34,7 +34,6 @@ import re
 import random
 import ast  # Güvenli bir şekilde string'den Python nesnesine dönüşüm için
 import requests
-from PIL import Image
 from io import BytesIO
 from bs4 import BeautifulSoup
 from collections import namedtuple
@@ -591,25 +590,32 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
         return None
 
     def load_image_from_url(self, url, gtk_image_widget):
-        """Load an image from a URL and display it in the specified Gtk.Image widget."""
-        response = requests.get(url)
-        if response.status_code == 200:
-            # Load the image into a PIL Image object
-            pil_image = Image.open(BytesIO(response.content))
-            pil_image = pil_image.convert("RGB")  # Ensure the image is in RGB format
+        """Load an image from a URL and display it in the specified Gtk.Image widget using GTK4."""
 
-            # Resize the image if necessary (optional)
-            # pil_image = pil_image.resize((desired_width, desired_height), Image.ANTIALIAS)
+        def update_image(data):
+            try:
+                # Convert data to GLib.Bytes
+                gbytes = GLib.Bytes.new(data)
+                # Create a Gdk.Texture from GBytes
+                texture = Gdk.Texture.new_from_bytes(gbytes)
 
-            # Convert the PIL Image to GdkPixbuf
-            data = BytesIO()
-            pil_image.save(data, format="JPEG")  # Consider your image's format
-            data.seek(0)  # Rewind the data
-            pixbuf_loader = GdkPixbuf.PixbufLoader.new_with_type("jpeg")
-            pixbuf_loader.write(data.read())
-            pixbuf_loader.close()
-            pixbuf = pixbuf_loader.get_pixbuf()
+                # Update the Gtk.Image widget to display the new image
+                if isinstance(gtk_image_widget, Gtk.Picture):
+                    gtk_image_widget.set_paintable(texture)
+                elif isinstance(gtk_image_widget, Gtk.Image):
+                    gtk_image_widget.set_from_paintable(texture)
+            except Exception as e:
+                print(f"Error processing image: {e}")
 
-            # Update the specified Gtk.Image widget to display the new image
-            gtk_image_widget.set_from_pixbuf(pixbuf)
+        def download_image():
+            try:
+                response = requests.get(url)
+                response.raise_for_status()  # Raises an HTTPError for bad responses
+                GLib.idle_add(update_image, response.content)
+            except requests.RequestException as e:
+                print(f"Error downloading image: {e}")
 
+        # Start download in a separate thread to avoid freezing the GUI
+        from threading import Thread
+        download_thread = Thread(target=download_image)
+        download_thread.start()
