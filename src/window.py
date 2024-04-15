@@ -285,10 +285,9 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
         current_date = datetime.now()
 
         # Iterate over the last 5 days including today
-        for i in range(5):
+        for i in range(10):
             formatted_date = (current_date - timedelta(days=i)).strftime("%Y-%m-%d")
             result_array = self.get_array_by_date(words_by_day, formatted_date)
-
             # If data is found for the calculated date, break out of the loop
             if result_array is not None:
                 break

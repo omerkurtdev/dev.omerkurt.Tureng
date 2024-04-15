@@ -6,8 +6,8 @@
 	<project_license>GPL-3.0-or-later</project_license>
 	<summary>Tureng dictionary</summary>
 	<launchable type="desktop-id">dev.omerkurt.Tureng.desktop</launchable>
-	<url type="homepage">https://github.com/omerkurtdev/tureng-flathub</url>
-	<url type="bugtracker">https://github.com/omerkurtdev/tureng-flathub/issues</url>
+	<url type="homepage">https://github.com/omerkurtdev/dev.omerkurt.Tureng</url>
+	<url type="bugtracker">https://github.com/omerkurtdev/dev.omerkurt.Tureng/issues</url>
 	<content_rating type="oars-1.1" />
 	<developer id="dev.omerkurt">
 		<name>Ömer Kurt</name>
@@ -38,9 +38,6 @@
 		<control>pointing</control>
 		<control>touch</control>
 	</recommends>
-    <requires>
-    <display_length compare="ge">768</display_length>
-  </requires>
   <branding>
     <color type="primary" scheme_preference="light">#a1f6b4</color>
     <color type="primary" scheme_preference="dark">#157b4c</color>
