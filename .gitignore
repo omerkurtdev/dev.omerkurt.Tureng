@@ -11,4 +11,3 @@ _build/
 *.flatpak
 .flatpak-builder/
 repo/
-
