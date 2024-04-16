@@ -313,18 +313,18 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
         current_color_scheme = style_manager.get_color_scheme()
         style_manager.set_color_scheme(Adw.ColorScheme.FORCE_LIGHT)
 
-    def write_sample_file(self):
-        data_dir = os.getenv(
-            "XDG_DATA_HOME", os.path.join(os.path.expanduser("~"), ".local", "share")
-        )
-        file_path = os.path.join(data_dir, "history.json")
-        try:
-            os.makedirs(data_dir, exist_ok=True)
-            with open(file_path, "w") as file:
-                file.write("Merhaba, bu bir test mesajıdır!\n")
-            print(f"'{file_path}' dizinine yazıldı.")
-        except Exception as e:
-            print(f"Dosyaya yazma işlemi sırasında hata oluştu: {e}")
+    # def write_sample_file(self):
+    #     data_dir = os.getenv(
+    #         "XDG_DATA_HOME", os.path.join(os.path.expanduser("~"), ".local", "share")
+    #     )
+    #     file_path = os.path.join(data_dir, "history.json")
+    #     try:
+    #         os.makedirs(data_dir, exist_ok=True)
+    #         with open(file_path, "w") as file:
+    #             file.write("Merhaba, bu bir test mesajıdır!\n")
+    #         print(f"'{file_path}' dizinine yazıldı.")
+    #     except Exception as e:
+    #         print(f"Dosyaya yazma işlemi sırasında hata oluştu: {e}")
 
     def on_row_selected(self, listbox, row):
         if row is not None:
@@ -504,6 +504,7 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
 
     def words_day(self, js_content):
         pattern = r"word_of_the_day_list=(\[.*?\])"  # Regular expression pattern
+        # Modified pattern to ignore nested quotes
         quote_pattern = r'"([^"\\]*(?:\\.[^"\\]*)*)"'
         try:
             matches = re.search(
@@ -513,17 +514,17 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
                 raise ValueError("word_of_the_day_list variable not found.")
 
             terms_str = matches.group(1)
-            # Find all expressions inside quotes
+            # Find all expressions inside quotes, ignoring nested quotes
             all_quotes = re.findall(quote_pattern, terms_str, re.DOTALL)
             if not all_quotes:
                 raise ValueError("Expressions inside quotes not found.")
-
             # Grouping into chunks of seven
             chunks = [all_quotes[i : i + 7] for i in range(0, len(all_quotes), 7)]
+            print(chunks)
             return chunks
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
-            return []  # Simplify the code
+            return []
 
     def guest_list(self, js_content):
         pattern = r"slider_guest_list=(\[.*?\])"  # Regular expression pattern
