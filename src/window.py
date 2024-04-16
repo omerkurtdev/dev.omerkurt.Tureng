@@ -417,7 +417,7 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
     def update_words(self, search_term):
         words, mp3_links = fetch_words_column(search_term)
         if len(words) == 0:
-            self.search_status.set_title("Bulunamadı!")
+            self.search_status.set_title("Not found!")
             self.remove_last_prepended_item()
 
         else:
