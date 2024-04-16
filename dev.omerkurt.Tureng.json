@@ -46,7 +46,7 @@
 
                     "type" : "git",
            	    "tag": "v1.0.0",
-                    "url" : "https://github.com/omerkurtdev/dev.omerkurt.Tureng"
+                    "url" : "https://github.com/omerkurtdev/dev.omerkurt.Tureng.git"
                 }
             ]
         }
