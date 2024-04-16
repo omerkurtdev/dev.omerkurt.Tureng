@@ -520,7 +520,6 @@ class TurengvocabularyWindow(Adw.ApplicationWindow):
                 raise ValueError("Expressions inside quotes not found.")
             # Grouping into chunks of seven
             chunks = [all_quotes[i : i + 7] for i in range(0, len(all_quotes), 7)]
-            print(chunks)
             return chunks
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
