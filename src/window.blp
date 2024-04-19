@@ -2,11 +2,6 @@ using Gtk 4.0;
 using Adw 1;
 
 template $TurengvocabularyWindow: Adw.ApplicationWindow {
-  width-request: 360;
-  height-request: 640;
-  default-width: 640;
-  default-height: 640;
-
   Adw.ToolbarView toolbar_view {
     [top]
     Adw.HeaderBar {
@@ -58,7 +53,7 @@ template $TurengvocabularyWindow: Adw.ApplicationWindow {
               name: "logo";
             }
 
-            Adw.Clamp {
+            Adw.StatusPage {
               Box {
                 orientation: vertical;
 
